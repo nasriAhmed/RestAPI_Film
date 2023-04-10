@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Film API REST</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link to Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.html">Liste Film <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="add_new_film.html">Add new film</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+
+        <h1>Add new film</h1>
+        <form id="submitfilmForm">
+            <div class="form-group">
+                <label for="exampleInputTitre">Titre film</label>
+                <input type="text" class="form-control" id="exampleInputTitre" aria-describedby="emailHelp" placeholder="Enter titre" required>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputAnnee">Année de production</label>
+                <input type="number" class=" form-control" id="exampleInputAnnee " placeholder="Année de production" min="1800" max="2023" required>
+            </div>
+            <div class=" form-group ">
+                <label for="exampleFormControlSelect ">Note film</label>
+                <select class="form-control " id="exampleFormControlSelect " required>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
+            </div>
+            <button type="submit " class="btn btn-primary ">Submit</button>
+
+        </form>
+    </div>
+</body>
+
+</html>
