@@ -16,10 +16,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="index.html">Liste Film <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="index.html">Movie List <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="add_new_film.html">Add new film</a>
+                        <a class="nav-link" href="add_new_film.html">Add Movie film</a>
                     </li>
                 </ul>
             </div>
@@ -27,19 +27,19 @@
     </header>
     <div class="container">
 
-        <h1>Add new film</h1>
-        <form id="submitfilmForm">
+        <h1>Add new Movie</h1>
+        <form id="addFilmForm">
             <div class="form-group">
-                <label for="exampleInputTitre">Titre film</label>
-                <input type="text" class="form-control" id="exampleInputTitre" aria-describedby="emailHelp" placeholder="Enter titre" required>
+                <label for="exampleInputTitre">TiTle</label>
+                <input type="text" name="titre" class="form-control" id="titre" aria-describedby="emailHelp" placeholder="enter the movie title" required>
             </div>
             <div class="form-group">
-                <label for="exampleInputAnnee">Année de production</label>
-                <input type="number" class=" form-control" id="exampleInputAnnee " placeholder="Année de production" min="1800" max="2023" required>
+                <label for="exampleInputAnnee">Year</label>
+                <input type="number" name="année" id="année" class="form-control" id="exampleInputAnnee " placeholder="Production Year" min="1800" max="2023" required>
             </div>
             <div class=" form-group ">
-                <label for="exampleFormControlSelect ">Note film</label>
-                <select class="form-control " id="exampleFormControlSelect " required>
+                <label for="exampleFormControlSelect">Rating</label>
+                <select class="form-control" name="note" id="note" id="exampleFormControlSelect " required>
               <option>1</option>
               <option>2</option>
               <option>3</option>
@@ -47,10 +47,45 @@
               <option>5</option>
             </select>
             </div>
-            <button type="submit " class="btn btn-primary ">Submit</button>
+            <button type="submit " class="btn btn-primary ">Add new movie</button>
 
         </form>
+      <br>
+        <div class="alert alert-success" id="success-alert" style="display:none"> 
+          Movie successfully added</div>
+
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+  <script>
+    $(document).ready(() => {
+      $('#sucess-alert').hide();
+      // Handle form submit
+      $('#addFilmForm').submit((event) => {
+        event.preventDefault();
+        const titre = $('#titre').val();
+        const année = $('#année').val();
+        const note = $('#note').val();
+        addFilm(titre, année, note);
+    });
+    })
+      function addFilm(titre, année, note) {
+      $.ajax({
+        url: 'http://localhost:3000/films/',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({ titre, année, note }),
+        success: () => {
+          $('#addFilmForm')[0].reset();
+          console.log("film ajoutéé avec sucess");
+          $("#success-alert").show();
+          setTimeout(function() {
+             $("#success-alert").hide(); }, 5000);
+          getFilms();
+        },
+      });
+    }
+      </script>
 </body>
 
 </html>

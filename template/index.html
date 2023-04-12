@@ -16,62 +16,59 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="index.html">Liste Film <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="index.html">Movie List <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="add_new_film.html">Add new film</a>
+                        <a class="nav-link" href="add_new_film.html">Add new Movie</a>
                     </li>
                 </ul>
             </div>
         </nav>
     </header>
     <div class="container">
-        <h1>Liste de film</h1>
-        <table class="table" id="filmDiv">
+        <h1>Movie List</h1>
+        <table class="table">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Titre</th>
-                    <th>Année</th>
-                    <th>Note</th>
-                    <th>Details</th>
+                    <th>Title</th>
+                    <th>Year</th>
+                    <th>Rating</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>John Smith</td>
-                    <td>john@example.com</td>
-                </tr>
-
-
+            <tbody id="FilmList">
             </tbody>
         </table>
     </div>
-    <script>
-        function getFilms() {
-            fetch(API_URL)
-                .then(response => response.json())
-                .then(films => {
-                    const filmsDiv = document.getElementById('films');
-                    filmsDiv.innerHTML = '';
-                    films.forEach(film => {
-                        const filmDiv = document.createElement('div');
-                        filmDiv.innerHTML = `
-                    <h2>${film.titre} (${film.année})</h2>
-                    <p>Rating: ${film.note}</p>
-  
-                  `;
-                        filmsDiv.appendChild(filmDiv);
-                    });
-                });
-        }
-    </script>
     <!-- Link to Bootstrap JavaScript -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNS" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+  
 </body>
-
+<script>
+    $(document).ready(() => {
+    getFilms();
+});
+    function getFilms() {
+      $.ajax({
+        url: 'http://localhost:3000/films/',
+        type: 'GET',
+        success: (films) => {
+          let rows = '';
+          films.forEach((film) => {
+            rows += `
+              <tr>
+                <td>${film.titre}</td>
+                <td>${film.année}</td>
+                <td>${film.note}</td>
+              </tr>
+            `;
+          });
+          $('#FilmList').html(rows);
+        },
+      });
+    }
+    </script>
 </html>
