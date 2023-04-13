@@ -5,3 +5,4 @@
 
 Avant de lancer ce projet
 Installez les paquets npm en utilisant la commande 'npm install'.
+aprés node server.js
